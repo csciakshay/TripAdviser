@@ -110,7 +110,7 @@
                 </div>
                 </div>
                 <div class ="col-md-4">
-                    <asp:FileUpload ID="FileUpload1" runat="server" /></div>
+                    <asp:FileUpload ID="FileUpload1" runat="server" AllowMultiple="true" /></div>
                 <div class ="col-md-4"></div>
                 </div>
 

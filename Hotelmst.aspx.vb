@@ -1,7 +1,10 @@
 ﻿Imports System.Data.SqlClient
+Imports System.IO
+
 Partial Class Hotelmst
     Inherits System.Web.UI.Page
     Dim con As New SqlConnection(ConfigurationManager.ConnectionStrings("Databs").ConnectionString)
+    Dim id As Integer
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         ValidationSettings.UnobtrusiveValidationMode = UI.UnobtrusiveValidationMode.None
         If Not Page.IsPostBack Then
@@ -58,7 +61,7 @@ Partial Class Hotelmst
             Dim a As Integer
             a = adap.ExecuteScalar()
             a += 1
-
+            id = a
             Dim img As String
             FileUpload1.SaveAs(Server.MapPath("~/upload/" + FileUpload1.FileName))
             img = "~/upload/" + FileUpload1.FileName
@@ -78,6 +81,7 @@ Partial Class Hotelmst
             cmd.Parameters.Add("@imagepath", Data.SqlDbType.VarChar).Value = img
 
             If cmd.ExecuteNonQuery() Then
+                UploadAndSaveImages()
                 MsgBox("success")
             Else
                 MsgBox("fail")
@@ -85,5 +89,29 @@ Partial Class Hotelmst
             con.Close()
         End If
 
+    End Sub
+    Protected Sub UploadAndSaveImages()
+        If FileUpload1.HasFiles Then
+            For Each postedFile As HttpPostedFile In FileUpload1.PostedFiles
+                Dim filename As String = Path.GetFileName(postedFile.FileName)
+                Dim contentType As String = postedFile.ContentType
+
+                Using fs As Stream = postedFile.InputStream
+                    Using br As New BinaryReader(fs)
+                        Dim bytes As Byte() = br.ReadBytes(Convert.ToInt32(fs.Length))
+                        FileUpload1.SaveAs(Server.MapPath("~/upload/HotelImages/" + filename))
+                        Dim query As String = "insert into hotelImages values (@Id, @Data)"
+                        Using cmd As New SqlCommand(query)
+                            cmd.Connection = con
+                            cmd.Parameters.AddWithValue("@Id", id)
+                            cmd.Parameters.AddWithValue("@Data", "~/upload/HotelImages/" + filename)
+                            cmd.ExecuteNonQuery()
+
+                        End Using
+
+                    End Using
+                End Using
+            Next
+        End If
     End Sub
 End Class

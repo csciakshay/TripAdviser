@@ -53,6 +53,12 @@
 	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 	        </ul>
 	      </div>
+            <div>
+                
+            <asp:Image ID="Image1" runat="server" ImageUrl ="~/upload/no-image-available-grid.jpg" Height ="40" Width ="40" style="border-radius : 50%"/>
+                <asp:Label ID="Label1" runat="server" Text="Welcome" ForeColor="Black"></asp:Label>
+
+            </div>
 	    </div>
 	  </nav>
     <!-- END nav -->

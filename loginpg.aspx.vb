@@ -16,12 +16,24 @@ Partial Class loginpg
         'Else
         'MsgBox("invalid")
         'End If
-        If cmd.ExecuteNonQuery() Then
-            MsgBox("success")
+        'If cmd.ExecuteNonQuery() Then
+        'MsgBox("success")
+        'Else
+        'MsgBox("fail")
+        'End If
+        'Dim adap As New SqlDataAdapter("login1", con)
+        Dim dt As New Data.DataTable()
+        dt.Load(cmd.ExecuteReader())
+        If dt.Rows.Count > 0 Then
+            Session("uname") = txtFullName.Text
+            Session("userImage") = dt.Rows(0)("image").ToString
+            Session("email") = dt.Rows(0)("email").ToString
+            Response.Redirect("registration.aspx")
         Else
-            MsgBox("fail")
+            MsgBox("Invalid UserName and password")
         End If
         con.Close()
+
     End Sub
 
     Protected Sub txtpass_TextChanged(sender As Object, e As EventArgs) Handles txtpass.TextChanged

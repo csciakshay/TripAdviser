@@ -21,19 +21,18 @@
                 </div>
                 <div class ="col-md-4">
              <div class="form-group">
+                  
        <asp:Label ID="Label3" runat="server" Text="Id"></asp:Label>
+               
                      <asp:DropDownList ID="DropDownList1" runat="server" class="form-control" DataSourceID="SqlDataSource1" DataTextField="Id" DataValueField="Id" AutoPostBack="True"></asp:DropDownList>
-                    
-                 
-                    
                  <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Databs %>" SelectCommand="SELECT [Id] FROM [citymst]"></asp:SqlDataSource>
-                    
-                 
-                    
+                            
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" ControlToValidate="DropDownList1"></asp:RequiredFieldValidator>
-                 <div class ="col-md-4"></div>
+                     
+                                 
                  </div>
                     </div>
+                <div class ="col-md-4"></div>
          </div> 
 
 
