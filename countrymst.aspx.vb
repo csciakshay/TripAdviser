@@ -9,14 +9,16 @@ Partial Class countrymst
             Dim cmd As New SqlCommand("insert into countrymst values('" & txtcountry.Text & "')", con)
 
             If cmd.ExecuteNonQuery() Then
-                MsgBox("Sucess")
+                '   MsgBox("Sucess")
+                ScriptManager.RegisterStartupScript(Me, Page.GetType, "Success", "alert('Country name saved');", True)
                 txtcountry.text = ""
             Else
-                MsgBox("Fail")
+                '  MsgBox("Fail")
+                ScriptManager.RegisterStartupScript(Me, Page.GetType, "Fails", "alert('Country name save fails');", True)
             End If
 
         Catch ex As Exception
-            Response.Redirect("errorPage.aspx?errMsg=" + ex.Message)
+            Response.Redirect("errorPage.aspx?errMsg=" + ex.Message, False)
         Finally
             con.Close()
         End Try
@@ -24,7 +26,10 @@ Partial Class countrymst
     End Sub
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
-        ValidationSettings.UnobtrusiveValidationMode = UI.UnobtrusiveValidationMode.None
+        ' ValidationSettings.UnobtrusiveValidationMode = UI.UnobtrusiveValidationMode.None
+        If Session("uname") Is Nothing Then
+            Response.Redirect("loginpg.aspx", False)
+        End If
     End Sub
 
     Protected Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
@@ -35,14 +40,16 @@ Partial Class countrymst
             cmd.Parameters.Add("@Id", Data.SqlDbType.VarChar).Value = DropDownList1.SelectedValue
             cmd.Parameters.Add("@Country", Data.SqlDbType.VarChar).Value = txtcountry.Text
             If cmd.ExecuteNonQuery Then
-                txtcountry.text = ""
-                MsgBox("sucess")
+                txtcountry.Text = ""
+                ScriptManager.RegisterStartupScript(Me, Page.GetType, "Success", "alert('Country name updated');", True)
+                'MsgBox("sucess")
             Else
-                MsgBox("fail")
+                ScriptManager.RegisterStartupScript(Me, Page.GetType, "Fails", "alert('Country name update fails');", True)
+                'MsgBox("fail")
 
             End If
         Catch ex As Exception
-            Response.Redirect("errorPage.aspx?errMsg=" + ex.Message)
+            Response.Redirect("errorPage.aspx?errMsg=" + ex.Message, False)
         Finally
             con.Close()
         End Try
@@ -56,7 +63,7 @@ Partial Class countrymst
             adap.Fill(ds)
             txtcountry.Text = ds.Rows(0)("country").ToString
         Catch ex As Exception
-            Response.Redirect("errorPage.aspx?errMsg=" + ex.Message)
+            Response.Redirect("errorPage.aspx?errMsg=" + ex.Message, False)
         Finally
             con.Close()
         End Try

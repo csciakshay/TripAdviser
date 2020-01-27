@@ -119,10 +119,11 @@
                 <div class ="col-md-4"></div>
                 <div class ="col-md-4">
              <div class="form-group">
-        <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-primary py-3 px-5"/>
-                 <div class ="col-md-4"></div>
+        <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-success py-3 px-5"/>
+                
                  </div>
                     </div>
+                  <div class ="col-md-4"></div>
         </div> 
         </div> 
         </section> 

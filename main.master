@@ -49,20 +49,22 @@
 	          <li class="nav-item active"><a href="about.html" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="places.html" class="nav-link">Places</a></li>
 	          <li class="nav-item"><a href="hotel.html" class="nav-link">Hotels</a></li>
-	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+	          <li class="nav-item"><a href="countrymst.aspx" class="nav-link">Country</a></li>
+                <li class="nav-item"><a href="statemst.aspx" class="nav-link">State</a></li>
+                <li class="nav-item"><a href="citymst.aspx" class="nav-link">City</a></li>
 	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 	        </ul>
 	      </div>
             <div>
                 
-            <asp:Image ID="Image1" runat="server" ImageUrl ="~/upload/no-image-available-grid.jpg" Height ="40" Width ="40" style="border-radius : 50%"/>
+            <a href="#" onclick="logout();"> <asp:Image ID="Image1" runat="server" ImageUrl ="~/upload/no-image-available-grid.jpg" Height ="40" Width ="40" style="border-radius : 50%"/></a>
                 <asp:Label ID="Label1" runat="server" Text="Welcome" ForeColor="Black"></asp:Label>
 
             </div>
 	    </div>
 	  </nav>
     <!-- END nav -->
-    <div class="hero-wrap js-fullheight" style="background-image: url('images/bg_1.jpg');">
+    <div class="hero-wrap" style="background-image: url('images/bg_1.jpg');height:200px">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
@@ -167,7 +169,15 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
-
+<script type="text/javascript" >
+    function logout() {
+        if (confirm('Are you sure want to logout?')) {
+            $.post("logout.aspx?action=logout", {}, function (data) {
+                location.href = "logout.aspx";
+            });
+        }
+    }
+            </script>
         
 </body>
 </html>

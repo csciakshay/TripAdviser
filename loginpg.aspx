@@ -30,7 +30,7 @@
                     </div>
                 <div class="col-md-4 ">
         <asp:Label ID="Label2" runat="server" Text="Password"></asp:Label>
-        <asp:TextBox ID="txtpass" runat="server" class="form-control"></asp:TextBox>
+        <asp:TextBox ID="txtpass" runat="server" class="form-control" TextMode="Password"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*" ControlToValidate="txtpass"></asp:RequiredFieldValidator> 
                     
                 </div>
@@ -44,7 +44,7 @@
         
                     </div>
                 <div class="col-md-2 ">
-                    <asp:HyperLink ID="HyperLink1" runat="server">Forgot Password</asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/forgotpass.aspx">Forgot Password</asp:HyperLink>
                     </div>
                 <div class="col-md-2 ">
                     <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/registration.aspx">Registration</asp:HyperLink>
@@ -54,17 +54,16 @@
                     </div>
                </div>
 
-            <div class="row">
-             <div class="col-md-4 ">
-               </div>    
-             <div class="col-md-4 ">
-                 <div class="form-group">
-        <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-primary py-3 px-5"/>
-               </div>    
-             <div class="col-md-4 ">
-               </div>    
+           <div class="row block-9">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="form-group">                 
+                        <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-success py-3 px-5"/>
+               
+           </div>
+                </div>
+                <div class="col-md-4"></div>
             </div>
-                </div> 
     	</div> 
          </section> 
 

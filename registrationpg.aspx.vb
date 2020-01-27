@@ -37,10 +37,10 @@ Partial Class registrationpg
     End Sub
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
-        ValidationSettings.UnobtrusiveValidationMode = UI.UnobtrusiveValidationMode.None
+        ' ValidationSettings.UnobtrusiveValidationMode = UI.UnobtrusiveValidationMode.None
+        If Session("uname") Is Nothing Then
+            Response.Redirect("loginpg.aspx", False)
+        End If
     End Sub
 
-    Protected Sub txtCountry_TextChanged(sender As Object, e As EventArgs) Handles txtCountry.TextChanged
-
-    End Sub
 End Class

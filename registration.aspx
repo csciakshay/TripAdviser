@@ -88,8 +88,8 @@
                 <div class="col-md-3"></div>
                 <div class="col-md-7">
                     <div class="form-group">
-        <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-primary py-3 px-5"/>
-        <asp:Button ID="btnReset" runat="server" Text="Reset" class="btn btn-primary py-3 px-5"/>
+        <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-success py-3 px-5"/>
+        <asp:Button ID="btnReset" runat="server" Text="Reset" class="btn btn-info py-3 px-5"/>
    </div>
                 </div>
                 <div class="col-md-2"></div>

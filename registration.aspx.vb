@@ -27,14 +27,19 @@ Partial Class registration
         cmd.Parameters.Add("@Address", Data.SqlDbType.VarChar).Value = txtAddress.Text
         cmd.Parameters.Add("@Country", Data.SqlDbType.VarChar).Value = txtCountry.Text
         If cmd.ExecuteNonQuery() Then
-            MsgBox("success")
+            'MsgBox("success")
+            ScriptManager.RegisterStartupScript(Me, Page.GetType, "Success", "alert('Now you are registered');", True)
         Else
-            MsgBox("fail")
+            ' MsgBox("fail")
+            ScriptManager.RegisterStartupScript(Me, Page.GetType, "Fails", "alert('Fails to register');", True)
         End If
         con.Close()
     End Sub
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
-        ValidationSettings.UnobtrusiveValidationMode = UI.UnobtrusiveValidationMode.None
+        '  ValidationSettings.UnobtrusiveValidationMode = UI.UnobtrusiveValidationMode.None
+        If Session("uname") Is Nothing Then
+            Response.Redirect("loginpg.aspx", False)
+        End If
     End Sub
 End Class

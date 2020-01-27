@@ -7,9 +7,14 @@ Partial Class statemst
         Try
             con.Open()
             Dim cmd As New SqlCommand("insert into statemst values('" & txtstate.Text & "')", con)
-            cmd.ExecuteNonQuery()
+            If cmd.ExecuteNonQuery() Then
+                ScriptManager.RegisterStartupScript(Me, Page.GetType, "Success", "alert('State name saved');", True)
+                txtstate.Text = ""
+            Else
+                ScriptManager.RegisterStartupScript(Me, Page.GetType, "Fails", "alert('State name save fails');", True)
+            End If
         Catch ex As Exception
-            Response.Redirect("errorPage.aspx?errMsg=" + ex.Message)
+            Response.Redirect("errorPage.aspx?errMsg=" + ex.Message, False)
         Finally
             con.Close()
         End Try
@@ -17,7 +22,11 @@ Partial Class statemst
     End Sub
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
-        ValidationSettings.UnobtrusiveValidationMode = UI.UnobtrusiveValidationMode.None
+        ' ValidationSettings.UnobtrusiveValidationMode = UI.UnobtrusiveValidationMode.None
+        If Session("uname") Is Nothing Then
+            Response.Redirect("loginpg.aspx", False)
+        End If
+
     End Sub
 
     Protected Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
@@ -28,13 +37,16 @@ Partial Class statemst
             cmd.Parameters.Add("@id", Data.SqlDbType.VarChar).Value = DropDownList1.SelectedValue
             cmd.Parameters.Add("@state", Data.SqlDbType.VarChar).Value = txtstate.Text
             If cmd.ExecuteNonQuery Then
-                MsgBox("sucess")
+                txtstate.Text = ""
+                ScriptManager.RegisterStartupScript(Me, Page.GetType, "Success", "alert('State name updated');", True)
+               
             Else
-                MsgBox("fail")
+
+                ScriptManager.RegisterStartupScript(Me, Page.GetType, "Fails", "alert('State name update fails');", True)
 
             End If
         Catch ex As Exception
-            Response.Redirect("errorPage.aspx?errMsg=" + ex.Message)
+            Response.Redirect("errorPage.aspx?errMsg=" + ex.Message, False)
         Finally
             con.Close()
         End Try
@@ -48,7 +60,7 @@ Partial Class statemst
             adap.Fill(ds)
             txtstate.Text = ds.Rows(0)("state").ToString
         Catch ex As Exception
-            Response.Redirect("errorPage.aspx?errMsg=" + ex.Message)
+            Response.Redirect("errorPage.aspx?errMsg=" + ex.Message, False)
         Finally
             con.Close()
         End Try
