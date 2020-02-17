@@ -52,7 +52,7 @@
                 <div class ="col-md-4">
              <div class="form-group">
         <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-primary py-3 px-5"/>
-                  <asp:Button ID="btnUpdate" runat="server" Text="Update" class="btn btn-primary py-3 px-5"/>
+                  <asp:Button ID="btnUpdate" runat="server" Text="Update" class="btn btn-info py-3 px-5"/>
                  
                  </div>
                     </div>

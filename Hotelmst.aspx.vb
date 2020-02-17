@@ -82,12 +82,29 @@ Partial Class Hotelmst
 
             If cmd.ExecuteNonQuery() Then
                 UploadAndSaveImages()
-                MsgBox("success")
+                ScriptManager.RegisterStartupScript(Me, Page.GetType, "Success", "alert('Hotel Registration sucessfully');", True)
+                reset()
+
+
             Else
-                MsgBox("fail")
+                ScriptManager.RegisterStartupScript(Me, Page.GetType, "Fail", "alert('Hotel Registration Fails');", True)
+                reset()
             End If
             con.Close()
         End If
+
+    End Sub
+    Sub reset()
+        txtnm.Text = ""
+        txtadrss.Text = ""
+        country.SelectedIndex = ""
+        state.SelectedIndex = ""
+        city.SelectedIndex = ""
+        txtcheckin.Text = ""
+        txtcheckout.Text = ""
+        txtroom.Text = ""
+        CheckBoxList1.ClearSelection()
+
 
     End Sub
     Protected Sub UploadAndSaveImages()

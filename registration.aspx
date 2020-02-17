@@ -32,23 +32,29 @@
                   <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" ControlToValidate="txtAddress"></asp:RequiredFieldValidator>
                 </div>
             </div>
+            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <contentTemplate>
+
             <div class="row">
                 <div class="col-md-4 ">
-        <asp:Label ID="Label4" runat="server" Text="City"></asp:Label>
-        <asp:TextBox ID="txtCity" runat="server" class="form-control"></asp:TextBox>
-                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" ControlToValidate="txtCity"></asp:RequiredFieldValidator>
+        <asp:Label ID="Label4" runat="server" Text="Country"></asp:Label>
+                    <asp:DropDownList ID="countrydropdown" runat="server" AutoPostBack="true" ></asp:DropDownList>
+                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" ControlToValidate="countrydropdown"></asp:RequiredFieldValidator>
                     </div>
                 <div class="col-md-4 ">
         <asp:Label ID="Label5" runat="server" Text="State"></asp:Label>
-        <asp:TextBox ID="txtState" runat="server" class="form-control"></asp:TextBox>
-                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*" ControlToValidate="txtState"></asp:RequiredFieldValidator>
+                    <asp:DropDownList ID="statedropdown" runat="server" AutoPostBack="true"></asp:DropDownList>
+                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*" ControlToValidate="statedropdown"></asp:RequiredFieldValidator>
                     </div>
                 <div class="col-md-4 ">
-         <asp:Label ID="Label6" runat="server" Text="Country"></asp:Label>
-        <asp:TextBox ID="txtCountry" runat="server" class="form-control"></asp:TextBox>
-                     <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*" ControlToValidate="txtCountry"></asp:RequiredFieldValidator>
+         <asp:Label ID="Label6" runat="server" Text="City"></asp:Label>
+                    <asp:DropDownList ID="citydropdown" runat="server"></asp:DropDownList>
+                     <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*" ControlToValidate="citydropdown"></asp:RequiredFieldValidator>
    </div>
                 </div>
+                    </contentTemplate>
+            </asp:UpdatePanel>
             <div class="row">
                  <div class="col-md-4 ">
         <asp:Label ID="Label7" runat="server" Text="Contact No" ></asp:Label></>
@@ -79,7 +85,7 @@
         <asp:FileUpload ID="FileUpload1" runat="server" /> 
         </div>
                  <div class="col-md-4 ">
-        
+                     <asp:Image ID="Image1" runat="server"  Width ="50" Height ="50" Visible ="false" />
    
    </div>
    </div><br />
@@ -88,14 +94,16 @@
                 <div class="col-md-3"></div>
                 <div class="col-md-7">
                     <div class="form-group">
-        <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-primary py-3 px-5"/>
-        <asp:Button ID="btnReset" runat="server" Text="Reset" class="btn btn-primary py-3 px-5"/>
+        <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-info py-3 px-5"/>
+                        <asp:Button ID="btnUpdate" runat="server" Text="Update" class="btn btn-success py-3 px-5" Visible="False"/>
+                        
+        <asp:Button ID="btnReset" runat="server" Text="Reset" class="btn btn-info py-3 px-5"/>
    </div>
                 </div>
                 <div class="col-md-2"></div>
             </div>
 
-            </div>
+        </div>
      </section>
 
 </asp:Content>

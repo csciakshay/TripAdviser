@@ -6,8 +6,9 @@ Partial Class statemst
     Protected Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
         Try
             con.Open()
-            Dim cmd As New SqlCommand("insert into statemst values('" & txtstate.Text & "')", con)
+            Dim cmd As New SqlCommand("insert into statemst values('" & txtstate.Text & "', '" & DropDownList2.SelectedValue & "')", con)
             cmd.ExecuteNonQuery()
+            ScriptManager.RegisterStartupScript(Me, Page.GetType, "Success", "alert('Insert Sucessfully');", True)
         Catch ex As Exception
             Response.Redirect("errorPage.aspx?errMsg=" + ex.Message)
         Finally
@@ -28,9 +29,13 @@ Partial Class statemst
             cmd.Parameters.Add("@id", Data.SqlDbType.VarChar).Value = DropDownList1.SelectedValue
             cmd.Parameters.Add("@state", Data.SqlDbType.VarChar).Value = txtstate.Text
             If cmd.ExecuteNonQuery Then
-                MsgBox("sucess")
+                ScriptManager.RegisterStartupScript(Me, Page.GetType, "Success", "alert('State name saved');", True)
+                txtstate.Text = ""
+                'MsgBox("sucess")
             Else
-                MsgBox("fail")
+                ScriptManager.RegisterStartupScript(Me, Page.GetType, "Fail", "alert('State name saved fails');", True)
+
+                'MsgBox("fail")
 
             End If
         Catch ex As Exception
@@ -47,10 +52,27 @@ Partial Class statemst
             Dim ds As New Data.DataTable()
             adap.Fill(ds)
             txtstate.Text = ds.Rows(0)("state").ToString
+
         Catch ex As Exception
             Response.Redirect("errorPage.aspx?errMsg=" + ex.Message)
         Finally
             con.Close()
         End Try
     End Sub
+
+    Protected Sub DropDownList2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList2.SelectedIndexChanged
+        Try
+            con.Open()
+            Dim adap As New SqlDataAdapter("select * from statemst where Country=" & DropDownList2.SelectedValue & "", con)
+            Dim ds As New Data.DataTable()
+            adap.Fill(ds)
+            txtstate.Text = ds.Rows(0)("state").ToString
+
+        Catch ex As Exception
+            Response.Redirect("errorPage.aspx?errMsg=" + ex.Message)
+        Finally
+            con.Close()
+        End Try
+    End Sub
+
 End Class

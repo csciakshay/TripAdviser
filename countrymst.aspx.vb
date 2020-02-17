@@ -9,10 +9,13 @@ Partial Class countrymst
             Dim cmd As New SqlCommand("insert into countrymst values('" & txtcountry.Text & "')", con)
 
             If cmd.ExecuteNonQuery() Then
-                MsgBox("Sucess")
-                txtcountry.text = ""
+                ScriptManager.RegisterStartupScript(Me, Page.GetType, "Success", "alert('Country name saved');", True)
+                txtcountry.Text = ""
+                ' MsgBox("Sucess")
+
             Else
-                MsgBox("Fail")
+                ScriptManager.RegisterStartupScript(Me, Page.GetType, "Fail", "alert('Country name save fails ');", True)
+                'MsgBox("Fail")
             End If
 
         Catch ex As Exception
@@ -36,9 +39,11 @@ Partial Class countrymst
             cmd.Parameters.Add("@Country", Data.SqlDbType.VarChar).Value = txtcountry.Text
             If cmd.ExecuteNonQuery Then
                 txtcountry.text = ""
-                MsgBox("sucess")
+                ScriptManager.RegisterStartupScript(Me, Page.GetType, "Success", "alert('Country name saved');", True)
+                'MsgBox("sucess")
             Else
-                MsgBox("fail")
+                ScriptManager.RegisterStartupScript(Me, Page.GetType, "Fail", "alert('Country name saved fails');", True)
+                'MsgBox("fail")
 
             End If
         Catch ex As Exception

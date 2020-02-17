@@ -25,12 +25,14 @@ Partial Class loginpg
         Dim dt As New Data.DataTable()
         dt.Load(cmd.ExecuteReader())
         If dt.Rows.Count > 0 Then
+            Session("uid") = dt.Rows(0)("Id").ToString
             Session("uname") = txtFullName.Text
-            Session("userImage") = dt.Rows(0)("image").ToString
+            Session("userImage") = dt.Rows(0)("Img").ToString
             Session("email") = dt.Rows(0)("email").ToString
-            Response.Redirect("registration.aspx")
+            Response.Redirect("registration.aspx", False)
         Else
-            MsgBox("Invalid UserName and password")
+            ScriptManager.RegisterStartupScript(Me, Page.GetType, "Success", "alert('Invalid UserName and password');", True)
+            'MsgBox("Invalid UserName and password")
         End If
         con.Close()
 

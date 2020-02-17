@@ -33,6 +33,19 @@
                 <div class ="col-md-4"></div>
                 <div class ="col-md-4">
                     <div class="form-group">
+                <asp:Label ID="Label2" runat="server" Text=" Select Country"></asp:Label>
+                        <asp:DropDownList ID="DropDownList2" runat="server"  DataTextField="Country" DataValueField="Id" AutoPostBack="True"></asp:DropDownList>  
+                       
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" ControlToValidate="DropDownList2"></asp:RequiredFieldValidator>
+                </div>
+                </div>
+                <div class ="col-md-4"></div>
+            </div>
+
+            <div class="row">
+                <div class ="col-md-4"></div>
+                <div class ="col-md-4">
+                    <div class="form-group">
                 <asp:Label ID="Label1" runat="server" Text=" Enter State"></asp:Label>
                 <asp:TextBox ID="txtstate" runat="server" class="form-control"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ControlToValidate="txtstate"></asp:RequiredFieldValidator>
@@ -46,8 +59,8 @@
                 <div class ="col-md-4"></div>
                 <div class ="col-md-4">
              <div class="form-group">
-        <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-primary py-3 px-5"/>
-                  <asp:Button ID="btnUpdate" runat="server" Text="Update" class="btn btn-primary py-3 px-5"/>
+        <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-info py-3 px-5"/>
+                  <asp:Button ID="btnUpdate" runat="server" Text="Update" class="btn btn-info py-3 px-5"/>
                  <div class ="col-md-4"></div>
                  </div>
                     </div>
