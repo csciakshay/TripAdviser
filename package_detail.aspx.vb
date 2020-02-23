@@ -4,7 +4,7 @@ Imports System.IO
 Partial Class package_detail
     Inherits System.Web.UI.Page
     Dim con As New SqlConnection(ConfigurationManager.ConnectionStrings("Databs").ConnectionString)
-
+    Dim id As Integer
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         ValidationSettings.UnobtrusiveValidationMode = UI.UnobtrusiveValidationMode.None
         If Session("uid") Then
@@ -29,7 +29,7 @@ Partial Class package_detail
                 Dim a As Integer
                 a = adap1.ExecuteScalar()
                 a += 1
-                ID = a
+                id = a
                 txtid.Text = a
 
                 Dim adp As New SqlDataAdapter("select * from countrymst", con)
@@ -78,9 +78,7 @@ Partial Class package_detail
                 End If
             Next
            
-            Dim img As String
-            FileUpload1.SaveAs(Server.MapPath("~/upload/" + FileUpload1.FileName))
-            img = "~/upload/" + FileUpload1.FileName
+           
             Dim cmd As New SqlCommand("proc_package_detail", con)
             cmd.CommandType = Data.CommandType.StoredProcedure
             cmd.Parameters.Add("@country", Data.SqlDbType.VarChar).Value = countrydropdown.SelectedValue
@@ -99,12 +97,13 @@ Partial Class package_detail
             cmd.Parameters.Add("@tour_type", Data.SqlDbType.VarChar).Value = tourdropdown.SelectedValue
             cmd.Parameters.Add("@schedule", Data.SqlDbType.VarChar).Value = txtschedule.Text
             If cmd.ExecuteNonQuery() Then
-            ScriptManager.RegisterStartupScript(Me, Page.GetType, "Success", "alert('Insert Sucessfully');", True)
-            reset()
-        Else
-            ScriptManager.RegisterStartupScript(Me, Page.GetType, "Fails", "alert('Insert fail');", True)
-            reset()
-        End If
+                UploadAndSaveImages()
+                ScriptManager.RegisterStartupScript(Me, Page.GetType, "Success", "alert('Insert Sucessfully');", True)
+                reset()
+            Else
+                ScriptManager.RegisterStartupScript(Me, Page.GetType, "Fails", "alert('Insert fail');", True)
+                reset()
+            End If
         End If
     End Sub
     Sub reset()
@@ -132,12 +131,12 @@ Partial Class package_detail
                 Using fs As Stream = postedFile.InputStream
                     Using br As New BinaryReader(fs)
                         Dim bytes As Byte() = br.ReadBytes(Convert.ToInt32(fs.Length))
-                        FileUpload1.SaveAs(Server.MapPath("~/upload/imgmst/" + filename))
-                        Dim query As String = "insert into imgmst values (@Id, @Data)"
+                        FileUpload1.SaveAs(Server.MapPath("~/upload/PkgImages/" + filename))
+                        Dim query As String = "insert into imgmst values (@Data,@Id)"
                         Using cmd As New SqlCommand(query)
                             cmd.Connection = con
-                            cmd.Parameters.AddWithValue("@Id", id)
-                            cmd.Parameters.AddWithValue("@Data", "~/upload/imgmst/" + filename)
+                            cmd.Parameters.AddWithValue("@Id", txtid.Text)
+                            cmd.Parameters.AddWithValue("@Data", "~/upload/PkgImages/" + filename)
                             cmd.ExecuteNonQuery()
 
                         End Using
@@ -184,19 +183,6 @@ Partial Class package_detail
             con.Close()
         End Try
     End Sub
-
-    Protected Sub foodCheckBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles foodCheckBox.SelectedIndexChanged
-
-    End Sub
-
-    Protected Sub iddropdown_SelectedIndexChanged(sender As Object, e As EventArgs) Handles iddropdown.SelectedIndexChanged
-        
-    End Sub
-
-    Protected Sub txtplace_TextChanged(sender As Object, e As EventArgs) Handles txtplace.TextChanged
-
-    End Sub
-
     Protected Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         If Page.IsPostBack Then
             con.Open()
@@ -258,5 +244,17 @@ Partial Class package_detail
         foodCheckBox.ClearSelection()
         vehicleCheckBox.ClearSelection()
         txtschedule.Text = ""
+    End Sub
+
+    Protected Sub txtend_date_TextChanged(sender As Object, e As EventArgs) Handles txtend_date.TextChanged
+        Dim date1 As Date
+        Dim date2 As Date
+        date1 = Date.Parse(txtstart_date.Text)
+        date2 = Date.Parse(txtend_date.Text)
+        Dim days As Long
+
+        days = DateDiff(DateInterval.Day, date1, date2)
+
+        txtduration.Text = days.ToString
     End Sub
 End Class

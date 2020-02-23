@@ -17,7 +17,7 @@ Partial Class customize_package
             statedropdown.SelectedValue = dt.Rows(0)("State").ToString
             'statedropdown_SelectedIndexChanged(sender, e)
         Else
-            ' Response.Redirect("loginpg.aspx", False)
+            Response.Redirect("loginpg.aspx", False)
         End If
 
         If Not Page.IsPostBack Then
@@ -153,13 +153,67 @@ Partial Class customize_package
     End Sub
 
     Protected Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        If Page.IsPostBack Then
+            con.Open()
+            Dim checkfood As String = ""
+            Dim checkvehicle As String = ""
+            For Each item As ListItem In foodCheckBox.Items
+                If item.Selected Then
+                    checkfood &= item.Value + ","
+                End If
+            Next
 
+            For Each item As ListItem In vehicleCheckBox.Items
+                If item.Selected Then
+                    checkvehicle &= item.Value + ","
+                End If
+            Next
+            con.Open()
+            Dim cmd As New SqlCommand("update_pro_customize", con)
+            cmd.CommandType = Data.CommandType.StoredProcedure
+            cmd.Parameters.Add("@country", Data.SqlDbType.VarChar).Value = countrydropdown.SelectedValue
+            cmd.Parameters.Add("@state", Data.SqlDbType.VarChar).Value = statedropdown.SelectedValue
+            cmd.Parameters.Add("@city", Data.SqlDbType.VarChar).Value = citydropdown.SelectedValue
+            cmd.Parameters.Add("@places", Data.SqlDbType.VarChar).Value = txtplaces.Text
+            cmd.Parameters.Add("@duration", Data.SqlDbType.Int).Value = txtduration.Text
+            cmd.Parameters.Add("@discription", Data.SqlDbType.VarChar).Value = txtdiscription.Text
+            cmd.Parameters.Add("@start_date", Data.SqlDbType.Date).Value = txtstart_date.Text
+            cmd.Parameters.Add("@end_date", Data.SqlDbType.Date).Value = txtend_date.Text
+            cmd.Parameters.Add("@create_to", Data.SqlDbType.VarChar).Value = Session("uname")
+            cmd.Parameters.Add("@terms_condition", Data.SqlDbType.VarChar).Value = txtterms.Text
+            cmd.Parameters.Add("@budget", Data.SqlDbType.VarChar).Value = txtbudget.Text
+            cmd.Parameters.Add("@food", Data.SqlDbType.VarChar).Value = checkfood
+            cmd.Parameters.Add("@vehicle_type", Data.SqlDbType.VarChar).Value = checkvehicle
+            cmd.Parameters.Add("@tour_type", Data.SqlDbType.VarChar).Value = tourdropdown.SelectedValue
+
+            If cmd.ExecuteNonQuery() Then
+                ScriptManager.RegisterStartupScript(Me, Page.GetType, "Success", "alert('Update Sucessfully');", True)
+                reset()
+            Else
+                ScriptManager.RegisterStartupScript(Me, Page.GetType, "Fails", "alert('Update fail');", True)
+                reset()
+            End If
+        End If
+
+    End Sub
+    Sub reset2()
+        countrydropdown.SelectedValue = ""
+        statedropdown.SelectedValue = ""
+        citydropdown.SelectedValue = ""
+        txtplaces.Text = ""
+        txtduration.Text = ""
+        txtdiscription.Text = ""
+        txtstart_date.Text = ""
+        txtend_date.Text = ""
+        txtterms.Text = ""
+        txtbudget.Text = ""
+        foodCheckBox.ClearSelection()
+        vehicleCheckBox.ClearSelection()
+        tourdropdown.SelectedValue = ""
     End Sub
 
     Protected Sub txtend_date_TextChanged(sender As Object, e As EventArgs) Handles txtend_date.TextChanged
-        Dim ab As Integer
-        ab = txtend_date.Text - txtstart_date.Text
-        txtduration.Text = ab
+       
 
     End Sub
 End Class

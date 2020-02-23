@@ -5,7 +5,7 @@
   <script type="text/javascript" src="/datetime/js/foopicker.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
- <section class="ftco-section contact-section ftco-degree-bg">
+    <section class="ftco-section contact-section ftco-degree-bg">
     	<div class="container">
             <div class="row">
                 <div class ="col-md-4"></div>
@@ -16,7 +16,9 @@
             </div>
             <br />
             
-
+             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <contentTemplate>
             <div class="row">
                 <div class ="col-md-4">
                      <div class="form-group">
@@ -28,7 +30,7 @@
                 <div class ="col-md-4">
                   <div class="form-group">
                 <asp:Label ID="Label2" runat="server" Text="Start_Date"></asp:Label>
-                <asp:TextBox ID="txtstart_date" runat="server" class="form-control" ClientIDMode="Static"></asp:TextBox>
+                <asp:TextBox ID="txtstart_date" runat="server" class="form-control" ClientIDMode="Static" AutoPostBack ="true" ></asp:TextBox>
 
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" ControlToValidate="txtstart_date"></asp:RequiredFieldValidator>
                 </div>  
@@ -36,15 +38,13 @@
                 <div class ="col-md-4">
                 <div class="form-group">
                 <asp:Label ID="Label3" runat="server" Text="End_Date"></asp:Label>
-                <asp:TextBox ID="txtend_date" runat="server" class="form-control" ClientIDMode="Static"></asp:TextBox>
+                <asp:TextBox ID="txtend_date" runat="server" class="form-control"  AutoPostBack ="true" ></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" ControlToValidate="txtend_date"></asp:RequiredFieldValidator>
                 </div>  
             </div>
                 </div>
 
-              <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                <contentTemplate>
+             
             <div class="row">
                 <div class ="col-md-4">
                      <div class="form-group">
@@ -68,8 +68,6 @@
                 </div>  
             </div>
                 </div>
-</contentTemplate>
-            </asp:UpdatePanel>
 
 
             <div class="row">
@@ -173,6 +171,8 @@
                  <div class ="col-md-4"></div>
                   </div>  
         
+</contentTemplate>
+            </asp:UpdatePanel>
 
              <div class="row">
                 <div class ="col-md-4"></div>
