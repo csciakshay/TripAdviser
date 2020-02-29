@@ -17,7 +17,7 @@ Partial Class customize_package
             statedropdown.SelectedValue = dt.Rows(0)("State").ToString
             'statedropdown_SelectedIndexChanged(sender, e)
         Else
-            Response.Redirect("loginpg.aspx", False)
+            '   Response.Redirect("loginpg.aspx", False)
         End If
 
         If Not Page.IsPostBack Then

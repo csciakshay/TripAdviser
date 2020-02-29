@@ -30,7 +30,7 @@
                 <div class ="col-md-4">
                   <div class="form-group">
                 <asp:Label ID="Label2" runat="server" Text="Start_Date"></asp:Label>
-                <asp:TextBox ID="txtstart_date" runat="server" class="form-control" ClientIDMode="Static" AutoPostBack ="true" ></asp:TextBox>
+                <asp:TextBox ID="txtstart_date" runat="server" class="form-control"></asp:TextBox>
 
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" ControlToValidate="txtstart_date"></asp:RequiredFieldValidator>
                 </div>  
@@ -38,8 +38,9 @@
                 <div class ="col-md-4">
                 <div class="form-group">
                 <asp:Label ID="Label3" runat="server" Text="End_Date"></asp:Label>
-                <asp:TextBox ID="txtend_date" runat="server" class="form-control"  AutoPostBack ="true" ></asp:TextBox>
+                <asp:TextBox ID="txtend_date" runat="server" class="form-control" AutoPostBack="true"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" ControlToValidate="txtend_date"></asp:RequiredFieldValidator>
+                    
                 </div>  
             </div>
                 </div>
@@ -81,7 +82,7 @@
                 <div class ="col-md-4">
                   <div class="form-group">
                 <asp:Label ID="Label8" runat="server" Text="Duration"></asp:Label>
-                <asp:TextBox ID="txtduration" runat="server" class="form-control"></asp:TextBox>
+                <asp:TextBox ID="txtduration" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="*" ControlToValidate="txtduration"></asp:RequiredFieldValidator>
                 </div>  
                 </div>
@@ -187,14 +188,14 @@
 
 
 
-       </div>
+       
 <script type="text/javascript">
     var foopicker = new FooPicker({
-        id: 'txtstart_date',
+        id: '<%= txtstart_date.ClientID %>',
         dateFormat: 'dd/MM/yyyy'
     });
     var foopicker2 = new FooPicker({
-        id: 'txtend_date',
+        id: '<%= txtend_date.ClientID %>',
         dateFormat: 'dd/MM/yyyy'
     });
   </script>
