@@ -208,7 +208,8 @@
                                             runat="server" class="button primary  small"><img src="images/view.png" width="30" height="30"/></asp:LinkButton>
                                         <asp:LinkButton ID="LinkButton2" href='<%# Eval("id", "PackageDtl.aspx?ID={0}") %>'
                                             runat="server" class="button small"><img src="images/heart.jpg" width="30" height="30"/></asp:LinkButton>
-                                        <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="images/heart.jpg" OnClick="ImageButton1_Click"/>
+                                        <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="images/heart.jpg" OnClick="ImageButton1_Click"
+                                            Width="30" Height="30" />
                                         <br />
                                     </ItemTemplate>
                                 </asp:DataList>

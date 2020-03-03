@@ -37,7 +37,7 @@ Partial Class forgotpass
             End If
         Catch ex As Exception
             MsgBox(ex.ToString)
-            Response.Redirect("errorPage.aspx?errMsg=" + ex.Message, False)
+            Response.Redirect("errorPage.aspx?errMsg=" + ex.Message.Replace("\r\n", String.Empty), False)
         Finally
             con.Close()
         End Try

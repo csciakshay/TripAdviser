@@ -19,7 +19,7 @@ Partial Class countrymst
             End If
 
         Catch ex As Exception
-            Response.Redirect("errorPage.aspx?errMsg=" + ex.Message)
+            Response.Redirect("errorPage.aspx?errMsg=" + ex.Message.Replace("\r\n", String.Empty), False)
         Finally
             con.Close()
         End Try
@@ -47,7 +47,7 @@ Partial Class countrymst
 
             End If
         Catch ex As Exception
-            Response.Redirect("errorPage.aspx?errMsg=" + ex.Message)
+            Response.Redirect("errorPage.aspx?errMsg=" + ex.Message.Replace("\r\n", String.Empty), False)
         Finally
             con.Close()
         End Try
@@ -61,7 +61,7 @@ Partial Class countrymst
             adap.Fill(ds)
             txtcountry.Text = ds.Rows(0)("country").ToString
         Catch ex As Exception
-            Response.Redirect("errorPage.aspx?errMsg=" + ex.Message)
+            Response.Redirect("errorPage.aspx?errMsg=" + ex.Message.Replace("\r\n", String.Empty), False)
         Finally
             con.Close()
         End Try
