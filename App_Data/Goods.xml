@@ -1,0 +1,5 @@
+<Goods>
+  <Good id="0" name="Good1" price="9.99" />
+  <Good id="1" name="Good2" price="19.99" />
+  <Good id="2" name="Good3" price="30.00" />
+</Goods>

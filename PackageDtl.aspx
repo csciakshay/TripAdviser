@@ -215,7 +215,11 @@
         </asp:UpdatePanel>
         <div class="row">
             <div class="col-md-2"></div>
-            <div class="col-md-10">
+            <div class="col-md-5">
+                <asp:Button ID="Button5" runat="server" Text="Payment" /><asp:Button ID="Button6"
+                    runat="server" Text="Back" />
+            </div>
+            <div class="col-md-5">
                 <div id="fb-root"></div>
                 <asp:Label ID="Label13" runat="server" Text="Share to others: " Font-Bold="true"></asp:Label>
                 <script  type="text/javascript">
