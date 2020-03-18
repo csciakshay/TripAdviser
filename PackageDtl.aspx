@@ -142,10 +142,20 @@
                             <tr>
                                 <td width="10%">Id</td>
 
-                                <td width="35%">Name</td>
+                                <td width="35%">Country</td>
 
                                 <td width="25%">City</td>
-                                <td width="30%">Address</td>
+                                <td width="30%">State</td>
+                                <td width="30%">Places</td>
+                                <td width="30%">Duration</td>
+                                <td width="30%">Description</td>
+                                <td width="30%">Start date</td>
+                                <td width="30%">End Date</td>
+                                <td width="30%">Hotel</td>
+                                <td width="30%">Terms and Condition</td>
+                                <td width="30%">Budget</td>
+                                <td width="30%">Food</td>
+                                <td width="30%">Tour Type</td>
 
                             </tr>
 
@@ -175,9 +185,38 @@
                                 </td>
                                 <td width="30%">
 
-                                    <asp:Label ID="Label4" runat="server" Text='<%#Eval("City")%>' />
+                                    <asp:Label ID="Label4" runat="server" Text='<%#Eval("State")%>' />
                                 </td>
+                                <td width="30%">
 
+                                    <asp:Label ID="Label14" runat="server" Text='<%#Eval("Places")%>' />
+                                </td>
+                                <td width="30%">
+
+                                    <asp:Label ID="Label15" runat="server" Text='<%#Eval("duration")%>' />
+                                </td>
+                                <td width="30%">
+
+                                    <asp:Label ID="Label16" runat="server" Text='<%#Eval("discription")%>' />
+                                </td>
+                                <td width="30%">
+
+                                    <asp:Label ID="Label17" runat="server" Text='<%#Eval("start_date")%>' />
+                               </td>
+                                    <td width="30%">
+
+                                        <asp:Label ID="Label18" runat="server" Text='<%#Eval("end_date")%>' />
+                                        </td>
+                                        <td width="30%">
+
+                                            <asp:Label ID="Label19" runat="server" Text='<%#Eval("hotel_id")%>' />
+                                            </td>
+                                            <td width="30%">
+
+                                                <asp:Label ID="Label20" runat="server" Text='<%#Eval("terms_condition")%>' />
+
+                                            </td>
+                                        
 
                             </tr>
 

@@ -1,7 +1,11 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Data
+
 Partial Class home
     Inherits System.Web.UI.Page
     Dim con As New SqlConnection(ConfigurationManager.ConnectionStrings("Databs").ConnectionString)
+    Dim dt As New Data.DataTable()
+    Dim CurrentPage As Integer
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
@@ -42,12 +46,23 @@ Partial Class home
         If DropDownList1.SelectedIndex > 0 Then
             cityCondition = "and a.city like '" + DropDownList1.SelectedValue + "%' "
         End If
-        SqlDataSource1.SelectCommand = "SELECT a.Id,a.country,a.state,a.city,a.places,a.duration,a.discription,a.start_date,a.end_date,a.hotel_id,a.terms_condition,a.budget,a.food,a.vehicle_type,a.tour_type,a.schedule,(select top(1) img from imgmst b where b.pkg_id=a.Id ) as img FROM package_detail a where 1=1 " + typeCondition + cityCondition
+        MsgBox("R1: " + r1.Value)
+        MsgBox("R2: " + r2.Value)
+        MsgBox("R3: " + r3.Value)
+        MsgBox("R4: " + r4.Value)
+        priceCondition = "and a.budget between " + r1.Value + " and " + r2.Value + " "
+
+        'priceCondition = "and price between 5001 and 10000 "
+        'priceCondition = "and price between 10000 and 9999999 "
+
+        SqlDataSource1.SelectCommand = "SELECT a.Id,a.country,a.state,a.city,a.places,a.duration,a.discription,a.start_date,a.end_date,a.hotel_id,a.terms_condition,a.budget,a.food,a.vehicle_type,a.tour_type,a.schedule,(select top(1) img from imgmst b where b.pkg_id=a.Id ) as img FROM package_detail a where 1=1 " + typeCondition + cityCondition + priceCondition
         SqlDataSource1.DataBind()
         DataList1.DataBind()
+
     End Sub
 
     Protected Sub ImageButton1_Click(sender As Object, e As ImageClickEventArgs)
         MsgBox("Image button click")
     End Sub
+    
 End Class

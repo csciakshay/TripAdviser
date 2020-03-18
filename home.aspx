@@ -109,12 +109,12 @@
                                 <div class="form-group">
                                     <div class="range-slider">
                                         <span>
-                                            <input type="number" value="25000" min="0" max="120000" />
+                                            <input type="number" value="25000" min="0" max="120000" runat="server" id="r1"/>
                                             -
-										    <input type="number" value="50000" min="0" max="120000" />
+										    <input type="number" value="50000" min="0" max="120000" runat="server" id="r2" />
                                         </span>
-                                        <input value="1000" min="0" max="120000" step="500" type="range" />
-                                        <input value="50000" min="0" max="120000" step="500" type="range" />
+                                        <input value="1000" min="0" max="120000" step="500" type="range" runat="server" id="r3" />
+                                        <input value="50000" min="0" max="120000" step="500" type="range" runat="server" id="r4" />
                                        
                                     </div>
                                 </div>
@@ -182,27 +182,27 @@
             <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("img") %>' Height="40" Width="40" />
                                         <br />
 
-                                        country:
+                                        Country:
             <asp:Label ID="countryLabel" runat="server" Text='<%# Eval("country") %>' />
                                         <br />
-                                        state:
+                                        State:
             <asp:Label ID="stateLabel" runat="server" Text='<%# Eval("state") %>' />
                                         <br />
-                                        city:
+                                        City:
             <asp:Label ID="cityLabel" runat="server" Text='<%# Eval("city") %>' />
                                         <br />
-                                        places:
+                                        Places:
             <asp:Label ID="placesLabel" runat="server" Text='<%# Eval("places") %>' />
                                         <br />
-                                        duration:
+                                        Duration:
             <asp:Label ID="durationLabel" runat="server" Text='<%# Eval("duration") %>' />
                                         <br />
 
-
-
-
-                                        tour_type:
+                                        Tour Type:
             <asp:Label ID="tour_typeLabel" runat="server" Text='<%# Eval("tour_type") %>' />
+                                        <br />
+                                        Budget:
+            <asp:Label ID="budgetLabel1" runat="server" Text='<%# Eval("budget")%>' />
                                         <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <asp:LinkButton ID="LinkButton1" href='<%# Eval("id", "PackageDtl.aspx?ID={0}")%>'
                                             runat="server" class="button primary  small"><img src="images/view.png" width="30" height="30"/></asp:LinkButton>
@@ -223,7 +223,8 @@
                     <div class="row mt-5">
                         <div class="col text-center">
                             <div class="block-27">
-                                <ul>
+                                
+                                <%--<ul>
                                     <li><a href="#">&lt;</a></li>
                                     <li class="active"><span>1</span></li>
                                     <li><a href="#">2</a></li>
@@ -231,7 +232,7 @@
                                     <li><a href="#">4</a></li>
                                     <li><a href="#">5</a></li>
                                     <li><a href="#">&gt;</a></li>
-                                </ul>
+                                </ul>--%>
                             </div>
                         </div>
                     </div>
