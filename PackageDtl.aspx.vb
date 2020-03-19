@@ -20,6 +20,7 @@ Partial Class PackageDtl
 
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
+        ClientScript.RegisterStartupScript(GetType(Page), "Javascript", "javascript:initialize();", True)
         con.Open()
         pid = 2
         'Query to get ImagesName and Description from database
@@ -204,4 +205,25 @@ Partial Class PackageDtl
     Protected Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         Response.Redirect(prevPage)
     End Sub
+    Public Function ConvertDataTabletoString() As String
+        Dim dt As New DataTable()
+        'Using con As New SqlConnection("Data Source=(LocalDB)\v11.0;AttachDbFilename=G:\ASPNET\AddMarkerstoGoogleMapFromDatabase\App_Data\Database.mdf;Integrated Security=True")
+        Using cmd As New SqlCommand("select title=City,lat=latitude,lng=longitude from citymst", con)
+            con.Open()
+            Dim da As New SqlDataAdapter(cmd)
+            da.Fill(dt)
+            Dim serializer As New System.Web.Script.Serialization.JavaScriptSerializer()
+            Dim rows As New List(Of Dictionary(Of String, Object))()
+            Dim row As Dictionary(Of String, Object)
+            For Each dr As DataRow In dt.Rows
+                row = New Dictionary(Of String, Object)()
+                For Each col As DataColumn In dt.Columns
+                    row.Add(col.ColumnName, dr(col))
+                Next
+                rows.Add(row)
+            Next
+            Return serializer.Serialize(rows)
+        End Using
+        ' End Using
+    End Function
 End Class
